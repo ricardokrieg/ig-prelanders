@@ -1,0 +1,298 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="theme-color" content="#5B165F">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="noimageindex, noarchive">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" integrity="undefined" crossorigin="anonymous">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        html {
+            width: 100%;
+            height: 100%;
+            font-size: 16px;
+        }
+
+        strong {
+            color: #5B165F;
+        }
+
+        body {
+            min-height: 100%;
+            max-width: 100%;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .prize-container {
+            width: 140vw;
+            margin-left: -20vw;
+            padding: 0 20vw 20vw;
+            border-bottom-left-radius: 100%;
+            border-bottom-right-radius: 100%;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: rgb(57, 32, 110);
+            background: linear-gradient(135deg, rgba(57,32,110,1) 0%, rgba(197,50,124,1) 100%);
+        }
+
+        .menu img {
+            width: 16px;
+            height: 16px;
+            margin: 16px;
+            opacity: 0.8;
+        }
+
+        .prize-container .congratulations {
+            font-size: 2.2rem;
+            font-weight: 100;
+            color: white;
+            text-align: center;
+        }
+
+        .prize {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .prize p {
+            font-size: 2rem;
+            color: rgba(197,50,124,1);
+            text-align: center;
+        }
+
+        .prize img {
+            width: 50vw;
+            margin-top: -15vw;
+        }
+
+        .winner {
+            background: rgb(57, 32, 110);
+            background: linear-gradient(135deg, rgba(57,32,110,1) 0%, rgba(197,50,124,1) 100%);
+            color: white;
+            margin-top: 20px;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        .winner .img-container {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            padding: 2px;
+            text-align: center;
+            border-radius: 100%;
+            margin-top: -20px;
+            background: #FD9409;
+        }
+
+        .winner .crown-image {
+            position: absolute;
+            width: 40px;
+            height: auto;
+            top: -25px;
+            right: -10px;
+            transform: rotate(25deg);
+        }
+
+        .winner .image {
+            border-radius: 100%;
+            width: 56px;
+            height: 56px;
+        }
+
+        .winner .name {
+            font-size: 1.5rem;
+        }
+
+        .winner .username {
+            font-size: 1.2rem;
+            font-weight: 100;
+        }
+
+        .instructions {
+            font-size: 1rem;
+            text-align: justify;
+        }
+
+        .timer {
+            color: #dab029;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .timer img {
+            width: 24px;
+            margin-top: -6px;
+        }
+
+        .footer {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .button {
+            font-size: 2rem;
+            color: white;
+            padding: 10px;
+            margin-bottom: 40px;
+            width: 80vw;
+            align-self: center;
+            border-radius: 10px;
+            text-align: center;
+
+            background: rgb(197,48,123);
+            background: linear-gradient(135deg, rgba(197,48,123,1) 0%, rgba(151,43,120,1) 100%);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="h-100 d-flex flex-column justify-content-between" style="overflow-x: hidden; min-height: 600px;">
+        <div>
+            <div class="prize-container">
+                <div class="menu d-flex flex-row justify-content-between">
+                    <img src="bars-solid.png" alt="Menu">
+                    <img src="cog-solid.png" alt="Settings">
+                </div>
+
+                <div class="congratulations">
+                    Congratulations!
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="prize">
+                    <img src="iphone.png" alt="iPhone X">
+                    <p>iPhone X</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="winner text-center d-flex flex-column align-items-center">
+            <div class="img-container">
+                <img class="crown-image" src="crown.png" alt="Winner">
+                <img id="image" class="image" src="" alt="Winner">
+            </div>
+            <div id="name" class="name"></div>
+            <div id="username" class="username"></div>
+        </div>
+
+        <div class="container">
+            <div class="instructions">
+                <p class="text-center fs-3"><strong>You won an iPhone X!</strong></p>
+                <p>Now you need to <strong>Claim</strong> your prize. Click in the button below and complete your registration.</p>
+                <p>You need to hurry! If you don't claim your prize <strong>now</strong>, we will give it to another participant.</p>
+
+                <div class="timer text-center fs-2">
+                    <img src="clock-solid.png" alt="Clock">
+                    <span id="timer"></span>
+                </div>
+            </div>
+
+            <div class="footer">
+                <div class="button">
+                    Claim
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+          startTimer();
+        });
+
+        function getTimestamp() {
+          return Math.floor(new Date().getTime() / 1000);
+        }
+
+        function startTimer() {
+          let finalTime = getTimestamp() + (2 * 60 + 34);
+          setTimerValue(finalTime);
+
+          setInterval(function() {
+            setTimerValue(finalTime);
+          }, 1000);
+        }
+
+        function setTimerValue(finalTime) {
+          let remaining = finalTime - getTimestamp();
+          if (remaining < 0) return;
+
+          let hours = Math.floor(remaining / (60 * 60));
+          let minutes = Math.floor(remaining / 60);
+          let seconds = Math.floor(remaining % 60);
+
+          let hoursStr = (hours >= 10 ? hours : '0' + hours).toString();
+          let minutesStr = (minutes >= 10 ? minutes : '0' + minutes).toString();
+          let secondsStr = (seconds >= 10 ? seconds : '0' + seconds).toString();
+
+          let valueStr = hoursStr + ':' + minutesStr + ':' + secondsStr;
+
+          $('#timer').text(valueStr);
+        }
+
+        // aa508b2a58b9a0ffa6bb07e9f39446f4f48f7cf5
+        // #ulfdugrnulhj:::Ulfdugr+Iudqfr:::/image.jpg
+
+        $(document).ready(function() {
+          const hash = location.hash.replace('#', '').replace('+', ' ');
+          const [cipher_username, cipher_name, image] = hash.split(':::');
+
+          const username = [...cipher_username].map(char => decrypt(char)).join('');
+          const name = [...cipher_name].map(char => decrypt(char)).join('');
+
+          $('#name').text(name);
+          $('#username').text('@' + username);
+          $('#image').attr('src', image.replace(/&amp;/g, '&'))
+        })
+
+        const alphabet = [
+          '0','1','2','3','4','5','6','7','8','9',
+          '.','_',
+          'a','b','c','d','e','f',
+          'g','h','i','j','k','l',
+          'm','n','o','p','q','r',
+          's','t','u','v','w','x',
+          'y','z',
+          'A','B','C','D','E','F',
+          'G','H','I','J','K','L',
+          'M','N','O','P','Q','R',
+          'S','T','U','V','W','X',
+          'Y','Z',
+        ];
+        const shift = 3;
+
+        function encrypt(char) {
+          if (!alphabet.includes(char)) {
+            return char;
+          }
+
+          const position = alphabet.indexOf(char);
+          const newPosition = (position + shift) % alphabet.length;
+          return alphabet[newPosition];
+        }
+
+        function decrypt(char) {
+          if (!alphabet.includes(char)) {
+            return char;
+          }
+
+          const position = alphabet.indexOf(char);
+          const newPosition = (position - shift) % alphabet.length;
+          return alphabet[newPosition];
+        }
+    </script>
+</body>
+</html>
